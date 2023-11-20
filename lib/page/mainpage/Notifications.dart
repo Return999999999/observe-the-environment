@@ -6,20 +6,10 @@ class Notifications extends StatefulWidget {
   const Notifications({super.key});
 
   @override
-  State<Notifications> createState() => _HomePageState();
+  State<Notifications> createState() => _NotificationsState();
 }
 
-class _HomePageState extends State<Notifications> {
-  //tạo List buttondata và đăng ký route
-  final List<Map<String, dynamic>> buttonData = [
-    {'icon': Icons.home, 'label': 'Quan Trắc', 'route': '/homepage/home'},
-    {'icon': Icons.settings, 'label': 'Settings', 'route': '/settings'},
-    {'icon': Icons.settings, 'label': 'Settings', 'route': '/settings'},
-    {'icon': Icons.settings, 'label': 'Settings', 'route': '/settings'},
-    {'icon': Icons.settings, 'label': 'Settings', 'route': '/settings'},
-    {'icon': Icons.settings, 'label': 'Settings', 'route': '/settings'}
-  ];
-
+class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
