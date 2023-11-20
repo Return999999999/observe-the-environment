@@ -58,7 +58,7 @@ class _SettingsState extends State<Settings> {
           ],
         ),
       ),
-      body: const Text('Thông báo'),
+      body: const Text('Cài đặt'),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 238, 238, 238),
         child: Column(
