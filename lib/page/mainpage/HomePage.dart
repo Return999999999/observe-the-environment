@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 IconButton(
                   onPressed: () {
-                    // Xử lý khi button Cài đặt được nhấn
+                    Navigator.pushReplacementNamed(context, '/Settings');
                   },
                   icon: const Icon(Icons.settings),
                   color: Colors.white,

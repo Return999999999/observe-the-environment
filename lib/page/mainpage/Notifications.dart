@@ -93,7 +93,7 @@ class _HomePageState extends State<Notifications> {
                 ),
                 IconButton(
                   onPressed: () {
-                    // Xử lý khi button Cài đặt được nhấn
+                    Navigator.pushReplacementNamed(context, '/Settings');
                   },
                   icon: const Icon(Icons.settings),
                   color: Colors.white,
