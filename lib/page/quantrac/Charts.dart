@@ -1,91 +1,117 @@
 // ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-import 'package:luanvan/data/Charts_data.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class Charts extends StatefulWidget {
   const Charts({super.key});
 
   @override
-  State<Charts> createState() => _SettingsState();
+  State<Charts> createState() => _ChartsState();
 }
 
-class _SettingsState extends State<Charts> {
-  late List<DataT> _chartData;
-  late TooltipBehavior _tooltipBehavior;
-  late List<salesData1> _chartData1;
+class _ChartsState extends State<Charts> {
+  Map<String, dynamic> stationData = {
+    "station1": {
+      "temperature": [25, 24, 23, 24, 21, 27, 19, 18, 17, 16],
+      "humidity": [60, 61, 62, 63, 64, 65, 66, 67, 68, 69],
+      "pressure": [101, 102, 101, 103, 104, 102, 103, 100, 102, 101]
+    },
+    "station2": {
+      "temperature": [28, 27, 26, 25, 24, 23, 22, 21, 20, 19],
+      "humidity": [55, 56, 57, 58, 59, 60, 61, 62, 63, 64],
+      "pressure": [101, 102, 101, 103, 104, 102, 103, 100, 102, 101]
+    }
+  };
 
-  @override
-  void initState() {
-    _chartData = getChartData();
-    _tooltipBehavior = TooltipBehavior(enable: true);
-    super.initState();
-    _chartData1 = getChartData1();
+  String selectedStation = 'station1';
+  String selectedParameter = 'temperature';
+
+  void _updateChartSeries(String station) {
+    setState(() {
+      selectedStation = station;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    List<int> selectedData =
+        stationData[selectedStation][selectedParameter].cast<int>();
+
     return Scaffold(
-        body: Column(
-      children: [
-        SizedBox(
-          height: 180,
-          child: SfCartesianChart(
-            title:
-                ChartTitle(text: 'Nhiệt độ', alignment: ChartAlignment.center),
-            legend: const Legend(isVisible: true),
-            tooltipBehavior: _tooltipBehavior,
-            series: <ChartSeries>[
-              LineSeries<DataT, double>(
-                  name: 'Trạm 1',
-                  dataSource: _chartData,
-                  xValueMapper: (DataT T, _) => T.year,
-                  yValueMapper: (DataT T, _) => T.T,
-                  dataLabelSettings: const DataLabelSettings(isVisible: true),
-                  enableTooltip: true),
-              LineSeries<salesData1, double>(
-                  name: 'Trạm 2',
-                  dataSource: _chartData1,
-                  xValueMapper: (salesData1 sales1, _) => sales1.year,
-                  yValueMapper: (salesData1 sales1, _) => sales1.sales,
-                  dataLabelSettings: const DataLabelSettings(isVisible: true),
-                  enableTooltip: true)
-            ],
-            primaryXAxis: NumericAxis(
-              edgeLabelPlacement: EdgeLabelPlacement.shift,
-            ),
-            primaryYAxis: NumericAxis(labelFormat: '{value}oC'),
+      appBar: AppBar(),
+      body: Column(
+        children: [
+          DropdownButton<String>(
+            value: selectedStation,
+            items: stationData.keys.map((String station) {
+              return DropdownMenuItem<String>(
+                value: station,
+                child: Text(
+                  station == 'station1'
+                      ? 'Trạm 1'
+                      : station == 'station2'
+                          ? 'Trạm 2'
+                          : station,
+                ),
+              );
+            }).toList(),
+            onChanged: (String? newValue) {
+              if (newValue != null) {
+                setState(() {
+                  _updateChartSeries(newValue);
+                });
+              }
+            },
           ),
-        ),
-        SizedBox(
-          height: 180,
-          child: SfCartesianChart(
-            title: ChartTitle(text: 'Độ ẩm', alignment: ChartAlignment.center),
-            legend: const Legend(isVisible: true),
-            tooltipBehavior: _tooltipBehavior,
-            series: <ChartSeries>[
-              LineSeries<DataT, double>(
-                  name: 'Trạm 1',
-                  dataSource: _chartData,
-                  xValueMapper: (DataT T, _) => T.year,
-                  yValueMapper: (DataT T, _) => T.H,
-                  dataLabelSettings: const DataLabelSettings(isVisible: true),
-                  enableTooltip: true),
-              LineSeries<salesData1, double>(
-                  name: 'Trạm 2',
-                  dataSource: _chartData1,
-                  xValueMapper: (salesData1 sales1, _) => sales1.year,
-                  yValueMapper: (salesData1 sales1, _) => sales1.H,
-                  dataLabelSettings: const DataLabelSettings(isVisible: true),
-                  enableTooltip: true)
-            ],
-            primaryXAxis: NumericAxis(
-              edgeLabelPlacement: EdgeLabelPlacement.shift,
-            ),
-            primaryYAxis: NumericAxis(labelFormat: '{value}%'),
+          DropdownButton<String>(
+            value: selectedParameter,
+            items: ['temperature', 'humidity', 'pressure'].map((String param) {
+              return DropdownMenuItem<String>(
+                value: param,
+                child: Text(
+                  param == 'temperature'
+                      ? 'Nhiệt độ'
+                      : param == 'humidity'
+                          ? 'Độ ẩm'
+                          : param == 'pressure'
+                              ? 'Áp xuất'
+                              : param,
+                ),
+              );
+            }).toList(),
+            onChanged: (String? newValue) {
+              if (newValue != null) {
+                setState(() {
+                  selectedParameter = newValue;
+                });
+              }
+            },
           ),
-        ),
-      ],
-    ));
+          const SizedBox(
+            height: 50,
+          ),
+          SizedBox(
+            width: 400,
+            height: 500,
+            child: LineChart(
+              LineChartData(
+                lineBarsData: [
+                  LineChartBarData(
+                    spots: selectedData.asMap().entries.map((e) {
+                      return FlSpot(e.key.toDouble(), e.value.toDouble());
+                    }).toList(),
+                  ),
+                ],
+                titlesData: const FlTitlesData(
+                  topTitles: AxisTitles(axisNameWidget: Text("")),
+                  rightTitles: AxisTitles(axisNameWidget: Text("")),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
