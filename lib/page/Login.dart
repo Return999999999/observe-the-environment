@@ -13,7 +13,10 @@ class _LoginState extends State<Login> {
   String username = "";
   String password = "";
   bool showPassword = false;
-
+  List<Map<String, String>> users = [
+    {'username': 'admin', 'password': 'admin'},
+    {'username': 'diepb1906635', 'password': '123456'},
+  ];
   void _togglePasswordVisibility() {
     setState(() {
       showPassword = !showPassword;
@@ -21,8 +24,19 @@ class _LoginState extends State<Login> {
   }
 
   void _login() {
-    if (username == 'admin' && password == 'admin') {
-      Navigator.pushReplacementNamed(context, '/homepage');
+    bool isValidUser = false;
+    for (var user in users) {
+      if (username == user['username'] && password == user['password']) {
+        isValidUser = true;
+        break;
+      }
+    }
+    if (isValidUser) {
+      Navigator.pushReplacementNamed(
+        context,
+        '/homepage',
+        arguments: username,
+      );
     } else {
       showDialog(
         context: context,

@@ -36,7 +36,7 @@ class _SettingsState extends State<Settings> {
                 ),
                 const SizedBox(width: 10),
                 const CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/logo.png'),
+                  backgroundImage: AssetImage('assets/images/user.png'),
                 ),
                 PopupMenuButton<String>(
                   onSelected: (value) {
@@ -79,14 +79,14 @@ class _SettingsState extends State<Settings> {
                     Navigator.pushReplacementNamed(context, '/Notifications');
                   },
                   icon: const Icon(Icons.notifications),
-                  color: Colors.blue,
+                  color: Colors.white,
                 ),
                 IconButton(
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, '/Settings');
                   },
                   icon: const Icon(Icons.settings),
-                  color: Colors.white,
+                  color: Colors.blue,
                 ),
               ],
             ),

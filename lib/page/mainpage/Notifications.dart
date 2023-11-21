@@ -36,7 +36,7 @@ class _NotificationsState extends State<Notifications> {
                 ),
                 const SizedBox(width: 10),
                 const CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/logo.png'),
+                  backgroundImage: AssetImage('assets/images/user.png'),
                 ),
                 PopupMenuButton<String>(
                   onSelected: (value) {

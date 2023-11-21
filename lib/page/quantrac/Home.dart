@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, unused_field
+// ignore_for_file: file_names, unused_field, unused_local_variable, prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 import 'package:luanvan/page/quantrac/Charts.dart';
 import 'package:luanvan/page/quantrac/Location.dart';
@@ -47,6 +47,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    //final username = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Quan Trắc'),
@@ -63,19 +64,19 @@ class _HomeState extends State<Home> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
+            DrawerHeader(
+              decoration: const BoxDecoration(
                 color: Colors.blue,
               ),
               child: Row(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     backgroundImage: AssetImage('assets/images/logo.png'),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Text(
-                    'Tên đăng nhập',
-                    style: TextStyle(fontSize: 15),
+                    "username",
+                    style: const TextStyle(fontSize: 15),
                   ),
                 ],
               ),

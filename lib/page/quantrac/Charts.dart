@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unused_import, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -14,13 +14,13 @@ class _ChartsState extends State<Charts> {
   Map<String, dynamic> stationData = {
     "station1": {
       "temperature": [25, 24, 23, 24, 21, 27, 19, 18, 17, 16],
-      "humidity": [60, 61, 62, 63, 64, 65, 66, 67, 68, 69],
+      "humidity": [67, 68, 65, 66, 65, 67, 66, 65, 66, 67],
       "pressure": [101, 102, 101, 103, 104, 102, 103, 100, 102, 101]
     },
     "station2": {
-      "temperature": [28, 27, 26, 25, 24, 23, 22, 21, 20, 19],
+      "temperature": [28, 26, 23, 25, 24, 26, 24, 23, 22, 24],
       "humidity": [55, 56, 57, 58, 59, 60, 61, 62, 63, 64],
-      "pressure": [101, 102, 101, 103, 104, 102, 103, 100, 102, 101]
+      "pressure": [102, 102, 101, 103, 102, 103, 103, 100, 102, 101]
     }
   };
 
@@ -39,7 +39,6 @@ class _ChartsState extends State<Charts> {
         stationData[selectedStation][selectedParameter].cast<int>();
 
     return Scaffold(
-      appBar: AppBar(),
       body: Column(
         children: [
           DropdownButton<String>(
@@ -89,7 +88,26 @@ class _ChartsState extends State<Charts> {
             },
           ),
           const SizedBox(
-            height: 50,
+            height: 20,
+          ),
+          Row(
+            children: [
+              const SizedBox(
+                width: 30,
+              ),
+              Text(
+                selectedParameter == 'temperature'
+                    ? '°C'
+                    : selectedParameter == 'humidity'
+                        ? '%'
+                        : selectedParameter == 'pressure'
+                            ? ' ‰'
+                            : selectedParameter,
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 5,
           ),
           SizedBox(
             width: 400,
@@ -110,6 +128,10 @@ class _ChartsState extends State<Charts> {
               ),
             ),
           ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [Text("Phút")],
+          )
         ],
       ),
     );

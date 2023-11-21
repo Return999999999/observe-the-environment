@@ -19,12 +19,12 @@ class _LocationState extends State<Location> {
   String selectedStation = "station1";
   Map<String, dynamic> stationData = {
     "station1": {
-      "sensor1": {"name": "temperature", "value": 25, "unit": "°C"},
+      "sensor1": {"name": "temperature", "value": 25, "unit": "oC"},
       "sensor2": {"name": "humidity", "value": 60, "unit": "%"},
       "sensor3": {"name": "pressure", "value": 1.01325, "unit": "Pa"}
     },
     "station2": {
-      "sensor1": {"name": "temperature", "value": 28, "unit": "°C"},
+      "sensor1": {"name": "temperature", "value": 28, "unit": "oC"},
       "sensor2": {"name": "humidity", "value": 55, "unit": "%"},
       "sensor3": {"name": "pressure", "value": 1.02312, "unit": "Pa"}
     }
@@ -84,7 +84,7 @@ class _LocationState extends State<Location> {
     final String message =
         MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
 
-    if (topic == 'stationData') {
+    if (topic == 'Data/view') {
       setState(() {
         Map<String, dynamic> parsedData = parseMessage(message);
         stationData = parsedData;
@@ -96,11 +96,6 @@ class _LocationState extends State<Location> {
     print('Disconnected from broker!');
     _connect(); // Reconnect to the broker when disconnected
   }
-  // void _publish() {
-  //   final builder = MqttClientPayloadBuilder();
-  //   builder.addString('Hello from Flutter!');
-  //   _client.publishMessage(_topic, MqttQos.atMostOnce, builder.payload);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -182,7 +177,7 @@ class _LocationState extends State<Location> {
                                   ),
                                   const SizedBox(width: 10),
                                   Text(
-                                    "Nhiệt độ: ${stationData[selectedStation]['sensor1']['value']}${stationData[selectedStation]['sensor1']['unit']}",
+                                    "Nhiệt độ:  ${stationData[selectedStation]['sensor1']['value']}${stationData[selectedStation]['sensor1']['unit']}",
                                     style: const TextStyle(
                                       fontSize: 20,
                                       color: Colors.black,

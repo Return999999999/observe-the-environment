@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // final username = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -41,12 +42,12 @@ class _HomePageState extends State<HomePage> {
             Row(
               children: [
                 const Text(
-                  'Tên đăng nhập',
+                  "admin",
                   style: TextStyle(fontSize: 15),
                 ),
                 const SizedBox(width: 10),
                 const CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/logo.png'),
+                  backgroundImage: AssetImage('assets/images/user.png'),
                 ),
                 PopupMenuButton<String>(
                   onSelected: (value) {
