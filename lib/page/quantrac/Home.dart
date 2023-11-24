@@ -75,7 +75,7 @@ class _HomeState extends State<Home> {
                   ),
                   const SizedBox(width: 20),
                   Text(
-                    "username",
+                    "admin",
                     style: const TextStyle(fontSize: 15),
                   ),
                 ],

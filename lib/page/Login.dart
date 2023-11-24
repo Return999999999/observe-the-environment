@@ -42,8 +42,8 @@ class _LoginState extends State<Login> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Login Error'),
-            content: const Text('Invalid username or password'),
+            title: const Text('Đăng nhập không thành công'),
+            content: const Text('Sai tên đăng nhập hoặc mật khẩu'),
             actions: <Widget>[
               TextButton(
                 child: const Text('OK'),
@@ -78,7 +78,7 @@ class _LoginState extends State<Login> {
               const SizedBox(height: 4.0),
               TextFormField(
                 decoration: const InputDecoration(
-                  labelText: 'Username',
+                  labelText: 'Tài khoản',
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -89,7 +89,7 @@ class _LoginState extends State<Login> {
               const SizedBox(height: 4.0),
               TextFormField(
                 decoration: const InputDecoration(
-                  labelText: 'Password',
+                  labelText: 'Mật khẩu',
                 ),
                 obscureText: !showPassword,
                 onChanged: (value) {
@@ -114,7 +114,7 @@ class _LoginState extends State<Login> {
               const SizedBox(height: 16.0),
               TextButton(
                 onPressed: _login,
-                child: const Text('Login'),
+                child: const Text('Đăng Nhập'),
               ),
             ],
           ),
