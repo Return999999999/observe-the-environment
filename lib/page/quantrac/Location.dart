@@ -1,5 +1,6 @@
-// ignore_for_file: non_constant_identifier_names, avoid_print, duplicate_ignore, unnecessary_new, depend_on_referenced_packages, file_names
+// ignore_for_file: non_constant_identifier_names, avoid_print, duplicate_ignore, unnecessary_new, depend_on_referenced_packages, file_names, unrelated_type_equality_checks
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -15,6 +16,8 @@ class Location extends StatefulWidget {
 }
 
 class _LocationState extends State<Location> {
+  Timer? _timer;
+  bool isRed = false;
   late MqttServerClient _client;
   String selectedStation = "station1";
   Map<String, dynamic> stationData = {
@@ -24,7 +27,7 @@ class _LocationState extends State<Location> {
       "sensor3": {"name": "pressure", "value": 1.01325, "unit": "Pa"}
     },
     "station2": {
-      "sensor1": {"name": "temperature", "value": 28, "unit": "oC"},
+      "sensor1": {"name": "temperature", "value": 35, "unit": "oC"},
       "sensor2": {"name": "humidity", "value": 55, "unit": "%"},
       "sensor3": {"name": "pressure", "value": 1.02312, "unit": "Pa"}
     }
@@ -39,6 +42,21 @@ class _LocationState extends State<Location> {
   void initState() {
     super.initState();
     _connect();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (stationData[selectedStation]['sensor1']['value'] >= 30) {
+          isRed = !isRed; // Đảo ngược giá trị màu sắc
+        } else {
+          isRed = false; // Đặt màu sắc về màu đen nếu nhiệt độ dưới 30
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel(); // Hủy timer trước khi dispose widget
+    super.dispose();
   }
 
   void _connect() async {
@@ -161,10 +179,8 @@ class _LocationState extends State<Location> {
                           child: Card(
                             shape: RoundedRectangleBorder(
                               side: const BorderSide(
-                                  color: Colors.red,
-                                  width: 2.0), // Đặt màu sắc và độ dày cho viền
-                              borderRadius: BorderRadius.circular(
-                                  15.0), // Đặt độ cong của góc thẻ
+                                  color: Colors.red, width: 2.0),
+                              borderRadius: BorderRadius.circular(15.0),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(15.0),
@@ -183,6 +199,12 @@ class _LocationState extends State<Location> {
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold,
                                     ),
+                                  ),
+                                  const SizedBox(width: 80),
+                                  Icon(
+                                    Icons.warning,
+                                    color: isRed ? Colors.red : Colors.black,
+                                    size: 30,
                                   ),
                                 ],
                               ),
