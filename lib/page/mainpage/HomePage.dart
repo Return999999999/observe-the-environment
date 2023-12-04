@@ -13,11 +13,11 @@ class _HomePageState extends State<HomePage> {
   //tạo List buttondata và đăng ký route
   final List<Map<String, dynamic>> buttonData = [
     {'icon': Icons.home, 'label': 'Quan Trắc', 'route': '/homepage/home'},
-    {'icon': Icons.settings, 'label': 'Settings', 'route': '/settings'},
-    {'icon': Icons.settings, 'label': 'Settings', 'route': '/settings'},
-    {'icon': Icons.settings, 'label': 'Settings', 'route': '/settings'},
-    {'icon': Icons.settings, 'label': 'Settings', 'route': '/settings'},
-    {'icon': Icons.settings, 'label': 'Settings', 'route': '/settings'}
+    {'icon': Icons.add, 'label': 'New', 'route': '/settings'},
+    {'icon': Icons.add, 'label': 'New', 'route': '/settings'},
+    {'icon': Icons.add, 'label': 'New', 'route': '/settings'},
+    {'icon': Icons.add, 'label': 'New', 'route': '/settings'},
+    {'icon': Icons.add, 'label': 'New', 'route': '/settings'}
   ];
 
   @override
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                       <PopupMenuEntry<String>>[
                     const PopupMenuItem<String>(
                       value: 'Logout',
-                      child: Text('Logout'),
+                      child: Text('Đăng xuất'),
                     ),
                   ],
                   child: const Icon(Icons.more_vert),
