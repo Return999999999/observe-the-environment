@@ -46,7 +46,7 @@ class _LoginState extends State<Login> {
             content: const Text('Sai tên đăng nhập hoặc mật khẩu'),
             actions: <Widget>[
               TextButton(
-                child: const Text('OK'),
+                child: const Text('Thành công'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -62,7 +62,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Đăng Nhập'),
       ),
       body: Center(
         child: Padding(

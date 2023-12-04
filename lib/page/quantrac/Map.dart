@@ -5,7 +5,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
 const MAPBOX_ACCESS_TOKEN =
-    'sk.eyJ1Ijoia29tYXg5OTk5OTkiLCJhIjoiY2xwYXhjNHpvMGN1djJrazdyNTV1OXJvbCJ9.BaxNBlOeyJ1hGZeKcFR77g';
+    'pk.eyJ1Ijoia29tYXg5OTk5OTkiLCJhIjoiY2xwcDg3c2pkMHpuYTJwcDZmbDM2a3RpNSJ9.kAw06CSwVwzNdGeH-LNjiQ';
 
 class Map extends StatefulWidget {
   const Map({super.key});
